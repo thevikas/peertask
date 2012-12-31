@@ -16,6 +16,20 @@
  */
 class Person extends CActiveRecord
 {
+	
+	function save($rv = true,$a = array())
+	{
+		$rt = parent::save($rv,$a);
+		if(!$rt)
+			return $rt;
+		
+		$u = new User;
+		$u->username = $this->email;
+		$u->id_person = $this->id_person;
+		$u->password = '123456';
+		$u->created = $u->updated = $this->created;
+		$u->save();
+	}
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -42,7 +56,7 @@ class Person extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('created, updated, first_name, last_name, email, dob, gender, source', 'required'),
+			array('created, updated, first_name, last_name, email, dob, gender', 'required'),
 			array('gender', 'numerical', 'integerOnly'=>true),
 			array('first_name, last_name, email, source', 'length', 'max'=>50),
 			// The following rule is used by search().

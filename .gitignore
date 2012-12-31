@@ -5,4 +5,5 @@ assets/*
 dd.php
 .htaccess
 protected/runtime/*
+protected/data/*
 .gitignore~
