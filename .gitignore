@@ -1,0 +1,8 @@
+.project
+.buildpath
+.settings
+assets/*
+dd.php
+.htaccess
+
+.gitignore~

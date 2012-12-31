@@ -1,0 +1,35 @@
+RewriteEngine on
+
+# 201210231457:vikas:#160:added old link transfers
+RewriteRule cms/page/why /page/why-inside-investor-2 [L,R=301]
+RewriteRule cms/page/business-intelligence /page/business-intelligence/  [L,R=301]
+RewriteRule cms/page/exclusive-events http://events.insideinvestor.com/  [L,R=301]
+RewriteRule cms/page/influential-network /page/council/  [L,R=301]
+
+RewriteRule cms/page/about 					/page/about-us/  [L,R=301]
+RewriteRule cms/page/about-inside-investor 	/page/inside-investor/  [L,R=301]
+RewriteRule cms/page/about-management 		/page/inside-investor/  [L,R=301]
+RewriteRule cms/page/contactus 				/site/contactus  [L,R=301]
+RewriteRule cms/page/careers 				/site/jobs  [L,R=301]
+
+RewriteRule cms/page/product 				/products  [L,R=301]
+# event ignored for now, todo for all sub pages 
+RewriteRule cms/page/product-opp 			/leads  [L,R=301]
+
+RewriteRule cms/page/benefits 				/page/benefits/  [L,R=301]
+RewriteRule cms/page/benefits-governments 	/page/business-intelligence/  [L,R=301]
+RewriteRule cms/page/benefits-multinational /page/business-intelligence/  [L,R=301]
+RewriteRule cms/page/benefits-financial 	/page/business-intelligence/  [L,R=301]
+RewriteRule cms/page/benefits-family 		/page/business-intelligence/  [L,R=301]
+
+RewriteRule cms/page/iic 					/page/council/  [L,R=301]
+RewriteRule cms/page/council-sector 		/page/council/  [L,R=301]
+RewriteRule cms/page/council-country 		/page/council/  [L,R=301]
+
+# if a directory or a file exists, use it directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# otherwise forward it to index.php
+
+RewriteRule . index.php
