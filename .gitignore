@@ -4,5 +4,5 @@
 assets/*
 dd.php
 .htaccess
-
+protected/runtime/*
 .gitignore~
