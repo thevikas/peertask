@@ -13,6 +13,8 @@
  */
 class User extends CActiveRecord
 {
+    public $password_str;
+    
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.

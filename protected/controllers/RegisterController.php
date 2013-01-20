@@ -19,12 +19,13 @@ class RegisterController extends Controller
 		{
 			$model->attributes=$_POST['Person'];
 			$model->updated = $model->created = date('Y-m-d H:i:s');
-			if($model->validate())
+			if($model->save())
 			{
-				$model->save();
-				// form inputs are valid, do something here
-				return;
+			    $this->getSendMail()->toUser($model);
+			    $this->render("success",array('model' => $model));    			    
+			    return;
 			}
+			//@todo to check why validator and save method is seperate and what happens when save does not save and returns fals
 		}
 		$this->render('register',array('model'=>$model));
 	}

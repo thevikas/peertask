@@ -20,4 +20,50 @@ class Controller extends CController
 	 * for more details on how to specify this property.
 	 */
 	public $breadcrumbs=array();
+
+    public static $dic;
+    
+    public function isLoggedIn()
+    {
+    	return !Yii::app()->user->getIsGuest();
+    }
+
+    /**
+     * Returns new SendMail object
+     * @return SendMail
+     */
+    public function getSendMail()
+    {
+    	return self::$dic->get('SendMail');
+    }
+
+    public function __construct($id,$module=null)
+    {
+        parent::__construct($id,$module);
+        if(!is_object(self::$dic))
+        {
+            Controller::$dic = new Bucket();
+            Controller::$dic->set(Yii::app()->mail,'yiiMail');
+        }
+    }
+
+    function render($view,$data=null,$return=false)
+    {
+        $out = parent::render($view,$data,true);
+
+        if(isset(Yii::app()->params['runmode']) && Yii::app()->params['runmode'] == 'test')
+        {
+            global $render_output;
+            return $render_output = $out;
+        }
+
+        if($return)
+            return $out;
+        else
+            echo $out;
+    }
 }
+
+class CExceptionEOF extends CException {}
+class CExceptionBadValue extends CException {}
+class CExceptionLogError extends CException {}

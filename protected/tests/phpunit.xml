@@ -24,6 +24,8 @@
 			<directory suffix=".php">../models</directory>
 			<directory suffix=".php">../controllers</directory>
 			<file>../components/UserIdentity.php</file>
+            <file>../components/Controller.php</file>
+            <file>../components/SendMail.php</file>
 		</whitelist>
 	</filter>
 
