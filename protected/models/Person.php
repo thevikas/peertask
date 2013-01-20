@@ -19,6 +19,9 @@ class Person extends CActiveRecord
 	
 	function save($rv = true,$a = null)
 	{
+	    $connection=Yii::app()->db;
+	    $transaction=$connection->beginTransaction();
+	    
 		$rt = parent::save($rv,$a);
 		if(!$rt)
 			return $rt;
@@ -28,8 +31,18 @@ class Person extends CActiveRecord
 		$u->id_person = $this->id_person;
 		$u->password = '123456';
 		$u->created = $u->updated = $this->created;
-		$u->save();
-		return true;
+		$rt = $u->save();
+		if($rt)
+		{
+		    $transaction->commit();
+		    return true;
+		}
+		else
+		{
+		    $this->addErrors($u->getErrors());
+		    $transaction->rollback();
+		    return false;
+		}		
 	}
 	
 	public function getFullname()
