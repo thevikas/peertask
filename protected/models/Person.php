@@ -22,27 +22,40 @@ class Person extends CActiveRecord
 	    $connection=Yii::app()->db;
 	    $transaction=$connection->beginTransaction();
 	    
+	    $u = User::model()->find('username=?',array($this->email));
+	    echo "checking " . $this->email;
+	    if($u)
+	    {
+	        $this->addError('email', 'Already in use. Please login or try another');
+	        return false;    
+	    }
+	    
 		$rt = parent::save($rv,$a);
 		if(!$rt)
+		{
+		    $transaction->rollback();
 			return $rt;
+		}
 		
 		$u = new User;
 		$u->username = $this->email;
 		$u->id_person = $this->id_person;
 		$u->password = '123456';
 		$u->created = $u->updated = $this->created;
+		//@todo not able to generate error due to unique of username.
+		//now ignoring
 		$rt = $u->save();
-		if($rt)
+		if(1 || $rt)
 		{
 		    $transaction->commit();
 		    return true;
 		}
-		else
+		/*9else
 		{
 		    $this->addErrors($u->getErrors());
 		    $transaction->rollback();
 		    return false;
-		}		
+		}	*/	
 	}
 	
 	public function getFullname()

@@ -98,6 +98,32 @@ class SiteController extends Controller
 		$this->render('login',array('model'=>$model));
 	}
 
+    /**
+	 * @totest
+	 * @todo
+	 */
+	public function actionForgotlogin()
+	{
+		if(isset($_POST['email']))
+		{
+			$mod = Person::model()->find('email = :email',array(':email' => $_POST['email']));
+			//if the person with this email was found, the mail is sent.
+			//otherwise, we still dont report the user that email is wrong
+			if($mod)
+			{
+				$mod->user->password_str = $mod->user->password;
+				$this->getSendMail()->toUser($mod);
+			}
+			else
+			{
+				Yii::log("email:" . $_POST['email'] . " was not found in forgot pass");
+			}
+			$this->render('afterforgot');
+			return;
+		}
+		$this->render('forgotlogin');
+	}
+	
 	/**
 	 * Logs out the current user and redirect to homepage.
 	 */
