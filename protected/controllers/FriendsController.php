@@ -14,7 +14,25 @@ class FriendsController extends Controller
 
 	public function actionNew()
 	{
-		$this->render('new');
+	    $model=new Friend('request');
+
+        // uncomment the following code to enable ajax-based validation
+        /*
+        if(isset($_POST['ajax']) && $_POST['ajax']==='friend-new-form')
+        {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
+        */
+    
+        if(isset($_POST['Friend']))
+        {
+            if($model->sendRequest($_POST['Friend']))
+            {
+                return;
+            }
+        }
+        $this->render('new',array('model'=>$model));
 	}
 
 	// Uncomment the following methods and override them if needed

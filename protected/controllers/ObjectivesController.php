@@ -9,7 +9,27 @@ class ObjectivesController extends Controller
 
 	public function actionNew()
 	{
-		$this->render('new');
+        $model=new Objective('new');
+    
+        // uncomment the following code to enable ajax-based validation
+        /*
+        if(isset($_POST['ajax']) && $_POST['ajax']==='objective-new-form')
+        {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
+        */
+    
+        if(isset($_POST['Objective']))
+        {
+            $model->attributes=$_POST['Objective'];
+            if($model->validate())
+            {
+                // form inputs are valid, do something here
+                return;
+            }
+        }
+        $this->render('new',array('model'=>$model));
 	}
 
 	public function actionProgess()

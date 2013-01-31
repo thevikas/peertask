@@ -19,7 +19,27 @@ class TasksController extends Controller
 
 	public function actionNew()
 	{
-		$this->render('new');
+		$model=new Task('new');
+
+        // uncomment the following code to enable ajax-based validation
+        /*
+        if(isset($_POST['ajax']) && $_POST['ajax']==='task-new-form')
+        {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
+        */
+    
+        if(isset($_POST['Task']))
+        {
+            $model->attributes=$_POST['Task'];
+            if($model->validate())
+            {
+                // form inputs are valid, do something here
+                return;
+            }
+        }
+        $this->render('new',array('model'=>$model));
 	}
 
 	// Uncomment the following methods and override them if needed
