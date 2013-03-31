@@ -1,6 +1,6 @@
 <?php
 
-class m130131_035100_create_task extends CDbMigration
+class m130131_035700_create_friend extends CDbMigration
 {
 	public function up()
 	{    

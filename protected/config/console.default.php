@@ -11,19 +11,16 @@ return array(
 
 	// application components
 	'components'=>array(
-		'db'=>array(
-			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
-		),
 		// uncomment the following to use a MySQL database
-		/*
-		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=testdrive',
-			'emulatePrepare' => true,
-			'username' => 'root',
-			'password' => '',
-			'charset' => 'utf8',
+		'testdb'=>array(
+			 'connectionString' => 'mysql:host=127.0.0.1;dbname=peertask_testing',
+            'emulatePrepare' => true,
+            'username' => '',
+            'password' => '',
+            'charset' => 'utf8',             
+		    'class' => 'CDbConnection',
 		),
-		*/
+		
 		'log'=>array(
 			'class'=>'CLogRouter',
 			'routes'=>array(

@@ -24,10 +24,10 @@ class FriendsController extends Controller
             Yii::app()->end();
         }
         */
-    
-        if(isset($_POST['Friend']))
+	    
+	    if(isset($_POST['Friend']))
         {
-            if($model->sendRequest($_POST['Friend']))
+            if($model->sendRequest(Yii::app()->user->id,$_POST['Friend']))
             {
                 return;
             }

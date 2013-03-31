@@ -62,6 +62,19 @@ class Controller extends CController
         else
             echo $out;
     }
+    
+    public function sendHeader($str)
+    {
+        if(isset(Yii::app()->params['runmode']) && Yii::app()->params['runmode'] == 'test')
+        {
+            //do nothing
+            return;
+        }
+        else
+        {
+            header($str);
+        }
+    }
 }
 
 class CExceptionEOF extends CException {}

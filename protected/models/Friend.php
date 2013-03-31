@@ -23,6 +23,19 @@ class Friend extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+	
+	public function sendRequest($id_user,$email)
+	{
+	    $m = $this->model(); 
+	    $m->person2email = $email;
+	    $m->person2key = "key1";
+	    $m->id_person1 = $id_user;
+	    if(!$rt = $m->save())
+	    {
+	        Yii::log("could not save request","error");
+	    }
+	    return $rt;
+	}
 
 	/**
 	 * @return string the associated database table name

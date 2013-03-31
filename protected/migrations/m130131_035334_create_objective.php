@@ -1,6 +1,6 @@
 <?php
 
-class m130131_035100_create_task extends CDbMigration
+class m130131_035334_create_objective extends CDbMigration
 {
 	public function up()
 	{    
