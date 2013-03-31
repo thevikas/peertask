@@ -26,7 +26,8 @@ class Person extends CActiveRecord
 	    echo "checking " . $this->email;
 	    if($u)
 	    {
-	        $this->addError('email', 'Already in use. Please login or try another');
+	        $this->addError('email', 'The email address is already registered. Please login instead.');
+		    $transaction->rollback();
 	        return false;    
 	    }
 	    

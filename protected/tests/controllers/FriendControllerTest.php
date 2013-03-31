@@ -51,7 +51,7 @@ class FriendControllerTest extends UnitTestCase
 
 	    	    
 		Yii::app()->runController('friends/new');
-		echo $this->getOutput();
+		
 		$this->assertXpathExists('//form//input[@name="Friend[person2email]"]');
 		//$this->assertOutputContains('Subscription Status: Inactive');
 	}

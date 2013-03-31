@@ -77,12 +77,12 @@ class SiteControllerTest extends UnitTestCase
 		 
 
 		$_SERVER['REQUEST_METHOD'] = 'POST';
-		$_POST['LoginForm']['username'] = 'unit5@test.com';
-		$_POST['LoginForm']['password'] = 'frisk33@';
+		$_POST['LoginForm']['username'] = 'testuser1@testing.com';
+		$_POST['LoginForm']['password'] = 'pass1';
 		Yii::app()->runController('site/login');
 		global $redirect_url,$redirect_status;
 
-		$this->assertEquals('./site/home',$redirect_url);
+		$this->assertEquals('index.php',$redirect_url);
 	}
 
 	/*public function testLoginFull2()

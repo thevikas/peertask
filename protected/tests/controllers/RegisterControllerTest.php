@@ -89,7 +89,7 @@ class RegisterControllerTest extends UnitTestCase
 	     
 	    $_POST = $p;
         Yii::app()->runController('register');
-		echo $this->getOutput();
+
 		if(!$error)
 		    $this->assertOutputContains('Please check you mailbox for login password');
 		else
