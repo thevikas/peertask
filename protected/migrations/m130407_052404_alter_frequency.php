@@ -4,7 +4,7 @@ class m130407_052404_alter_frequency extends CDbMigration
 {
 	public function up()
 	{
-	    $this->execute*("ALTER TABLE  `frequency` 
+	    $this->execute("ALTER TABLE  `frequency` 
 	                ADD  `repeated` BOOLEAN NOT NULL AFTER  `days_in_frequency` ,
                     ADD  `phpstrtotime` VARCHAR( 15 ) NOT NULL AFTER  `repeated`");
 	    
