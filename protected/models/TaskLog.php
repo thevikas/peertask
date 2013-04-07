@@ -1,19 +1,20 @@
 <?php
 
 /**
- * This is the model class for table "task".
+ * This is the model class for table "tlog".
  *
- * The followings are the available columns in table 'task':
+ * The followings are the available columns in table 'tlog':
  * @property integer $id_task
- * @property string $name
  * @property integer $id_objective
+ * @property string $dated
+ * @property integer $id_user
  */
-class Task extends CActiveRecord
+class TaskLog extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return Task the static model class
+	 * @return TaskLog the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -25,7 +26,7 @@ class Task extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'task';
+		return 'tlog';
 	}
 
 	/**
@@ -36,12 +37,11 @@ class Task extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name', 'required'),
-			array('id_objective', 'numerical', 'integerOnly'=>true),
-			array('name', 'length', 'max'=>50),
+			array('id_task, id_objective, dated, id_user', 'required'),
+			array('id_task, id_objective, id_user', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_task, name, id_objective', 'safe', 'on'=>'search'),
+			array('id_task, id_objective, dated, id_user', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,9 +53,9 @@ class Task extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-		        'tasklogs'=>array(self::HAS_MANY, 'TaskLog', 'id_task'),
+		        'task'=>array(self::BELONGS_TO, 'Task', 'id_task'),
 		        'objective'=>array(self::BELONGS_TO, 'Objective', 'id_objective'),
-		        //'user'=>array(self::BELONGS_TO, 'User', 'id_user'),
+		        'user'=>array(self::BELONGS_TO, 'User', 'id_user'),
 		);
 	}
 
@@ -66,8 +66,9 @@ class Task extends CActiveRecord
 	{
 		return array(
 			'id_task' => 'Id Task',
-			'name' => 'Name',
 			'id_objective' => 'Id Objective',
+			'dated' => 'Dated',
+			'id_user' => 'Id User',
 		);
 	}
 
@@ -83,8 +84,9 @@ class Task extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id_task',$this->id_task);
-		$criteria->compare('name',$this->name,true);
 		$criteria->compare('id_objective',$this->id_objective);
+		$criteria->compare('dated',$this->dated,true);
+		$criteria->compare('id_user',$this->id_user);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -32,7 +32,7 @@
 		);
 		?>
 		<?php echo CHtml::activeDropDownList($model,'id_objective', $olist, $options); ?>
-		<a href="<?php echo $this->createUrl("/objective/new"); ?>">New Objective</a>
+		<a href="<?php echo $this->createUrl("/objectives/new"); ?>">New Objective</a>
 		<?php echo $form->error($model,'id_objective'); ?>
 	</div>
 	
