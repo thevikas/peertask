@@ -17,7 +17,7 @@ class TasksController extends Controller
 		$this->render('logbook');
 	}
 
-	public function actionNew()
+	public function actionNew($id_objective = 0)
 	{
 		$model=new Task('new');
 
@@ -29,6 +29,9 @@ class TasksController extends Controller
             Yii::app()->end();
         }
         */
+		
+		if($id_objective)
+		    $model->id_objective = $id_objective;
     
         if(isset($_POST['Task']))
         {

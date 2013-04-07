@@ -4,7 +4,8 @@ class ObjectivesController extends Controller
 {
 	public function actionIndex()
 	{
-		$this->render('index');
+	    $obs = self::$dic->get('Objective')->byuser(Yii::app()->user->id)->findAll();
+		$this->render('index',array('objectives' => $obs));
 	}
 
 	public function actionNew()
@@ -23,9 +24,12 @@ class ObjectivesController extends Controller
         if(isset($_POST['Objective']))
         {
             $model->attributes=$_POST['Objective'];
+            $model->id_user = Yii::app()->user->id;
             if($model->validate())
             {
                 // form inputs are valid, do something here
+                $model->save();
+                $this->render('newsaved',array('model'=>$model));
                 return;
             }
         }

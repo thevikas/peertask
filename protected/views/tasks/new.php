@@ -20,14 +20,22 @@
 		<?php echo $form->textField($model,'name'); ?>
 		<?php echo $form->error($model,'name'); ?>
 	</div>
-
+	
 	<div class="row">
 		<?php echo $form->labelEx($model,'id_objective'); ?>
-		<?php echo $form->textField($model,'id_objective'); ?>
+		<?php
+		$olist = CHtml::listData(Objective::model()->byuser(Yii::app()->user->id)->findAll(), 'id_objective', 'name');
+		$options = array(
+		        'tabindex' => '0',
+				'id' => 'combobox',
+		        'empty' => '(not set)',
+		);
+		?>
+		<?php echo CHtml::activeDropDownList($model,'id_objective', $olist, $options); ?>
+		<a href="<?php echo $this->createUrl("/objective/new"); ?>">New Objective</a>
 		<?php echo $form->error($model,'id_objective'); ?>
 	</div>
-
-
+	
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Submit'); ?>
 	</div>

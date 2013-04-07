@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'objective':
  * @property integer $id_objective
  * @property string $name
+ * @property integer $id_user
  */
 class Objective extends CActiveRecord
 {
@@ -17,6 +18,15 @@ class Objective extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+	
+	public function byuser($id_user)
+	{
+        $this->getDbCriteria()->mergeWith(array(
+                'condition'=>'id_user = :userid',
+        		'params' => array(':userid' => $id_user),
+        ));
+        return $this;
 	}
 
 	/**
@@ -35,8 +45,9 @@ class Objective extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name', 'required'),
+			array('name,id_user', 'required'),
 			array('name', 'length', 'max'=>50),
+		    array('id_user','numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_objective, name', 'safe', 'on'=>'search'),
@@ -62,6 +73,7 @@ class Objective extends CActiveRecord
 		return array(
 			'id_objective' => 'Id Objective',
 			'name' => 'Name',
+		    'id_user' => 'User ID',
 		);
 	}
 
