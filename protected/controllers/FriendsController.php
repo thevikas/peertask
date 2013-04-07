@@ -27,8 +27,9 @@ class FriendsController extends Controller
 	    
 	    if(isset($_POST['Friend']))
         {
-            if($model->sendRequest(Yii::app()->user->id,$_POST['Friend']))
+            if($model->sendRequest(Yii::app()->user->id,$_POST['Friend']['person2email']))
             {
+                $this->render('requestsent');
                 return;
             }
         }

@@ -26,15 +26,21 @@ class Friend extends CActiveRecord
 	
 	public function sendRequest($id_user,$email)
 	{
-	    $m = $this->model(); 
+	    $m = new Friend(); 
 	    $m->person2email = $email;
 	    $m->person2key = "key1";
+	    $m->requested_date = date('Y-m-d H:i:s');
 	    $m->id_person1 = $id_user;
-	    if(!$rt = $m->save())
+	    $m->id_person2 = 0;
+	    $m->accepted_date = '';
+	    if(!($rt = $m->save()))
 	    {
+	        echo "here:";
+	        print_r($m->getErrors());
 	        Yii::log("could not save request","error");
+	        return false;
 	    }
-	    return $rt;
+	    return $m;
 	}
 
 	/**

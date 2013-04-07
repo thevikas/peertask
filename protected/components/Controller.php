@@ -75,6 +75,16 @@ class Controller extends CController
             header($str);
         }
     }
+    
+
+    public function getError(CModel $model)
+    {
+        $arr = $model->getErrors();
+        foreach($arr as $k=>$v)
+        {
+            return $v[0] . "(" . count($arr) . ")";
+        }
+    }
 }
 
 class CExceptionEOF extends CException {}
