@@ -7,7 +7,17 @@ $this->breadcrumbs=array(
 ?>
 <h1><?php echo $this->id . '/' . $this->action->id; ?></h1>
 
-<p>
-	You may change the content of this page by modifying
-	the file <tt><?php echo __FILE__; ?></tt>.
-</p>
+<ol>
+<?php
+foreach($objectives as $obj)
+{
+    ?>
+    <li>
+        <?php echo $obj->name;
+        echo $this->renderPartial("_tasks",array('tasks' => $obj->tasks));
+        ?>
+    </li>
+    <?php 
+} 
+?>
+</ol>

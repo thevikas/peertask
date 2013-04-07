@@ -21,7 +21,20 @@
 		<?php echo $form->error($model,'name'); ?>
 	</div>
 
-
+	<div class="row">
+		<?php echo $form->labelEx($model,'id_frequency'); ?>
+		<?php
+		$olist = CHtml::listData(Frequenct::model()->findAll(), 'id_frequency', 'name');
+		$options = array(
+		        'tabindex' => '0',
+				'id' => 'combobox',
+		        'empty' => '(not set)',
+		);
+		?>
+		<?php echo CHtml::activeDropDownList($model,'id_frequency', $olist, $options); ?>		
+		<?php echo $form->error($model,'id_frequency'); ?>
+	</div>
+	
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Submit'); ?>
 	</div>

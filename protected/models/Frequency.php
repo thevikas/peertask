@@ -1,32 +1,23 @@
 <?php
 
 /**
- * This is the model class for table "objective".
+ * This is the model class for table "frequency".
  *
- * The followings are the available columns in table 'objective':
- * @property integer $id_objective
+ * The followings are the available columns in table 'frequency':
+ * @property integer $id_frequency
  * @property string $name
- * @property integer $id_user
+ * @property integer $days_in_frequency
  */
-class Objective extends CActiveRecord
+class Frequency extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return Objective the static model class
+	 * @return Frequency the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
-	}
-	
-	public function byuser($id_user)
-	{
-        $this->getDbCriteria()->mergeWith(array(
-                'condition'=>'id_user = :userid',
-        		'params' => array(':userid' => $id_user),
-        ));
-        return $this;
 	}
 
 	/**
@@ -34,7 +25,7 @@ class Objective extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'objective';
+		return 'frequency';
 	}
 
 	/**
@@ -45,12 +36,12 @@ class Objective extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name,id_user', 'required'),
-			array('name', 'length', 'max'=>50),
-		    array('id_user','numerical', 'integerOnly'=>true),
+			array('name, days_in_frequency', 'required'),
+			array('days_in_frequency', 'numerical', 'integerOnly'=>true),
+			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_objective, name', 'safe', 'on'=>'search'),
+			array('id_frequency, name, days_in_frequency', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -62,8 +53,6 @@ class Objective extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-	           'tasks'=>array(self::HAS_MANY, 'Task', 'id_objective'),
-               'frequency'=>array(self::BELONGS_TO, 'Frequency', 'id_frequency'),
 		);
 	}
 
@@ -73,9 +62,9 @@ class Objective extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id_objective' => 'Id Objective',
+			'id_frequency' => 'Id Frequency',
 			'name' => 'Name',
-		    'id_user' => 'User ID',
+			'days_in_frequency' => 'Days In Frequency',
 		);
 	}
 
@@ -90,8 +79,9 @@ class Objective extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id_objective',$this->id_objective);
+		$criteria->compare('id_frequency',$this->id_frequency);
 		$criteria->compare('name',$this->name,true);
+		$criteria->compare('days_in_frequency',$this->days_in_frequency);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

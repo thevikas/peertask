@@ -39,6 +39,8 @@ class TasksController extends Controller
             if($model->validate())
             {
                 // form inputs are valid, do something here
+                $model->save();
+                $this->render('tasksaved',array('model'=>$model));
                 return;
             }
         }
