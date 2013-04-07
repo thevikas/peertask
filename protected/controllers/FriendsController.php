@@ -9,7 +9,8 @@ class FriendsController extends Controller
 
 	public function actionIndex()
 	{
-		$this->render('index');
+		$friends = self::$dic->get('Friend')->byuser(Yii::app()->user->id)->findAll();
+		$this->render('index',array('friends' => $friends));
 	}
 
 	public function actionNew()

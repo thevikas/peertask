@@ -7,6 +7,7 @@
  * @property integer $id_objective
  * @property string $name
  * @property integer $id_user
+ * @property integer $id_frequency
  */
 class Objective extends CActiveRecord
 {
@@ -37,6 +38,14 @@ class Objective extends CActiveRecord
 		return 'objective';
 	}
 
+	public function getFrequencyname()
+	{
+	    if($this->frequency)
+		return $this->frequency->name;
+	    else
+		return 'n/a';
+	}
+
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -45,9 +54,9 @@ class Objective extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name,id_user', 'required'),
+			array('name,id_user,id_frequency', 'required'),
 			array('name', 'length', 'max'=>50),
-		    array('id_user','numerical', 'integerOnly'=>true),
+		    array('id_user,id_frequency','numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_objective, name', 'safe', 'on'=>'search'),
@@ -77,6 +86,7 @@ class Objective extends CActiveRecord
 			'id_objective' => 'Id Objective',
 			'name' => 'Name',
 		    'id_user' => 'User ID',
+		    'id_frequency' => 'Frequency',
 		);
 	}
 

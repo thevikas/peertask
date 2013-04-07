@@ -1,3 +1,4 @@
 config/main.php
 config/test.php
 config/console.php
+up.sh

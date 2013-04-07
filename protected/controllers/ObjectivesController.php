@@ -2,6 +2,40 @@
 
 class ObjectivesController extends Controller
 {
+ /**
+     * Returns the data model based on the primary key given in the GET variable.
+     * If the data model is not found, an HTTP exception will be raised.
+     * @param integer $id the ID of the model to be loaded
+     * @return Task the loaded model
+     * @throws CHttpException
+     */
+    public function loadModel($id)
+    {
+	$model=Objective::model()->findByPk($id);
+	if($model===null)
+	    throw new CHttpException(404,'The requested page does not exist.');
+	return $model;
+    }
+
+    public function actionUpdate($id)
+    {
+	$model=$this->loadModel($id);
+
+	// Uncomment the following line if AJAX validation is needed
+	// $this->performAjaxValidation($model);
+
+	if(isset($_POST['Objective']))
+	{
+	    $model->attributes=$_POST['Objective'];
+	    if($model->save())
+		$this->redirect(array('/objectives'));
+	}
+
+	$this->render('new',array(
+		'model'=>$model,
+	));
+    }
+
 	public function actionIndex()
 	{
 	    $obs = self::$dic->get('Objective')->byuser(Yii::app()->user->id)->findAll();

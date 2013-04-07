@@ -2,6 +2,53 @@
 
 class TasksController extends Controller
 {
+    /**
+     * Returns the data model based on the primary key given in the GET variable.
+     * If the data model is not found, an HTTP exception will be raised.
+     * @param integer $id the ID of the model to be loaded
+     * @return Task the loaded model
+     * @throws CHttpException
+     */
+    public function loadModel($id)
+    {
+	$model=Task::model()->findByPk($id);
+	if($model===null)
+	    throw new CHttpException(404,'The requested page does not exist.');
+	return $model;
+    }
+
+    /**
+     * Deletes a particular model.
+     * If deletion is successful, the browser will be redirected to the 'admin' page.
+     * @param integer $id the ID of the model to be deleted
+     */
+    public function actionDelete($id)
+    {
+	$this->loadModel($id)->delete();
+
+	$this->redirect(array('/objectives'));
+    }
+
+
+    public function actionUpdate($id)
+    {
+	$model=$this->loadModel($id);
+
+	// Uncomment the following line if AJAX validation is needed
+	// $this->performAjaxValidation($model);
+
+	if(isset($_POST['Task']))
+	{
+	    $model->attributes=$_POST['Task'];
+	    if($model->save())
+		$this->redirect(array('/objectives'));
+	}
+
+	$this->render('new',array(
+		'model'=>$model,
+	));
+    }
+
 	public function actionHistory()
 	{
 		$this->render('history');

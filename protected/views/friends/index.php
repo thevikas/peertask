@@ -5,9 +5,16 @@ $this->breadcrumbs=array(
 	'Friends',
 );
 ?>
-<h1><?php echo $this->id . '/' . $this->action->id; ?></h1>
-
-<p>
-	You may change the content of this page by modifying
-	the file <tt><?php echo __FILE__; ?></tt>.
-</p>
+<ol>
+<?php
+foreach($friends as $f)
+{
+    ?>
+    <li>
+    <?php echo $f->fullname;?>, <?php echo $f->status;?>
+    </li>
+    <?php
+}
+?>
+</ol>
+<?php echo CHtml::link('Invite a friend',array('/friends/new'));?>

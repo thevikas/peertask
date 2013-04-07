@@ -7,3 +7,5 @@ dd.php
 protected/runtime/*
 protected/data/*
 .gitignore~
+
+protected/up.sh~
