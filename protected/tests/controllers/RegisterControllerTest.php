@@ -28,27 +28,6 @@ class RegisterControllerTest extends UnitTestCase
 		parent::setup();
 	}
 
-	public function dataregisterform1()
-	{
-		$ctr=0;
-		$p['first_name'] = 'test 1';
-		$p['last_name'] = 'last name1';
-		$p['email'] = 'good@email.com';
-		$p5['Person']  = $p0['Person'] = $p;
-		$p5['Person']['dob'] = '1950-10-10';
-		$p5['Person']['gender'] = '1';
-		
-		$p10['Person']  =  $p5['Person'];
-		$p10['Person']['email'] = 'duplicate@email.com';
-		
-		return array(
-				//all these are using anonymous user, where the form will appear
-				array(0,$p0,'//ul[li="Dob cannot be blank."]'),
-			    array(5,$p5),
-			    array(10,$p10,'//ul[li="The email address is already registered. Please login instead."]'),
-		);
-	}
-
 	/**
 	 * @group register
 	 * to test that the form that comes on cases of differenr registration is as expected, full or basic
@@ -65,13 +44,44 @@ class RegisterControllerTest extends UnitTestCase
 		//echo $this->getOutput();
 	}
 
-	/**
+	public function dataregisterform1()
+	{
+		$ctr=0;
+		$p['first_name'] = 'test 1';
+		$p['last_name'] = 'last name1';
+		$p['email'] = 'good@email.com';
+		$p5['Person']  = $p0['Person'] = $p;
+		$p5['Person']['dob'] = '1950-10-10';
+		$p5['Person']['gender'] = '1';
+		
+		$p10['Person']  =  $p5['Person'];
+		//email duplicate in person
+		$p10['Person']['email'] = 'duplicate1@email.com';
+		
+		$p15['Person']  =  $p5['Person'];
+		//email duplicate in user
+		$p15['Person']['email'] = 'duplicate2@email.com';
+		
+		return array(
+				//all these are using anonymous user, where the form will appear
+				array(0,$p0,'//ul[li="Dob cannot be blank."]'),
+			    array(5,$p5),
+		        //duplicate email in person table
+			    array(10,$p10,'//ul[li="The email address is already registered. Please login instead."]'),
+		        //duplicate email in user table
+		        array(15,$p15,'//ul[li="The email address is already registered. Please login instead."]'),
+		);
+	}
+
+    /**
 	 * @dataProvider dataregisterform1
 	 * @group register
 	 * to test that the form that comes on cases of differenr registration is as expected, full or basic
 	 */
 	public function testSiteRegisterPost($ctr,$p,$error = false)
 	{	    
+	    //if($ctr != 15) 
+	    //    return;
 	    $this->getFixtureManager()->load(array(
 	            'Person',
 	            'User',
@@ -79,7 +89,7 @@ class RegisterControllerTest extends UnitTestCase
 	     
 	    $_POST = $p;
         Yii::app()->runController('register');
-		//echo $this->getOutput();
+
 		if(!$error)
 		    $this->assertOutputContains('Please check you mailbox for login password');
 		else

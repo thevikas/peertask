@@ -15,6 +15,29 @@ class User extends CActiveRecord
 {
     public $password_str;
     
+    public function validatePassword($str)
+    {
+    
+        $passhash = $this->hashPassword($str);
+        return $this->password == $passhash;
+    }
+    
+    public function hashPassword($str)
+    {
+        //$srcstring = $this->id_user . $str;
+        //$h = hash('sha256',$srcstring);
+        //echo "made hash ($srcstring): " . $h . "<br/>";
+        return $str;
+    }
+    
+    public function setPassword($str)
+    {
+        $this->password = $this->hashPassword($str);
+        return parent::update(array('password'));
+    
+    }
+    
+    
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -43,8 +66,9 @@ class User extends CActiveRecord
 		return array(
 			array('id_person, username, password, created, updated', 'required'),
 			array('id_person', 'numerical', 'integerOnly'=>true),
-			array('username', 'length', 'max'=>15),
+			array('username', 'length', 'max'=>50),
 			array('password', 'length', 'max'=>30),
+			array('username', 'unique','message' => 'The username is already registered. Please login instead.'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_user, id_person, username, password, created, updated', 'safe', 'on'=>'search'),

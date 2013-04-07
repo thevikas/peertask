@@ -147,6 +147,15 @@ class UnitTestCase extends CDbTestCase
         global $render_output;
         $this->assertTrue(strstr($render_output,$txt)!== FALSE,$msg);
     }
+    
+    function assertOutputNotContains($txt,$msg=false)
+    {
+    	if(!$msg)
+    		$msg = "Output did contain $txt";
+    
+    	global $render_output;
+    	$this->assertFalse(strstr($render_output,$txt)!== FALSE,$msg);
+    }
 
 
     /**

@@ -77,12 +77,12 @@ class SiteControllerTest extends UnitTestCase
 		 
 
 		$_SERVER['REQUEST_METHOD'] = 'POST';
-		$_POST['LoginForm']['username'] = 'unit5@test.com';
-		$_POST['LoginForm']['password'] = 'frisk33@';
+		$_POST['LoginForm']['username'] = 'testuser1@testing.com';
+		$_POST['LoginForm']['password'] = 'pass1';
 		Yii::app()->runController('site/login');
 		global $redirect_url,$redirect_status;
 
-		$this->assertEquals('./site/home',$redirect_url);
+		$this->assertEquals('index.php',$redirect_url);
 	}
 
 	/*public function testLoginFull2()
@@ -96,75 +96,6 @@ class SiteControllerTest extends UnitTestCase
 	$this->assertXpathExists("//input[@name='LoginForm[username]']");
 	}*/
 
-
-	public function testHome()
-	{
-		$usermod = User::model()->findByPk(5);
-		Yii::app()->user->setState('usermodel',$usermod);
-		Yii::app()->runController('site/home');
-		$this->assertOutputContains('<dt>Subscription</dt><dd>Inactive</dd>');
-	}
-
-	/**
-	 * 201212212000:vikas:#202:testing site contactus
-	 */
-	public function testContactusPost1()
-	{
-		$_GET['src'] = 'investvine';
-		$_GET['iframe'] = '1';
-		$_POST['recaptcha_challenge_field'] = 'abc';
-		$_POST['recaptcha_response_field'] = 'abc';
-		$_POST['Contact'] = array('name' => 'vikas','email' => 'vikas@vikas.vikas','msg' => 'that msg');
-		Yii::app()->runController('site/contactus');
-		$this->assertXpathExists('//p/strong[text()="Thanks you for your message."]');
-		//$this->assertOutputContains('Subscription Status: Inactive');
-	}
-
-	/**
-	 *
-	 * @outputBuffering enabled
-	 * 201212212000:vikas:#202:testing site contactus
-	 */
-	public function testContactusPost2()
-	{
-		$_GET['src'] = 'investvine';
-		$_GET['iframe'] = '1';
-		$_POST['recaptcha_challenge_field'] = 'abc';
-		$_POST['recaptcha_response_field'] = 'abc';
-		$_POST['ajax'] = 'contact-contactus-form';
-		$_POST['Contact'] = array('name' => 'vikas','email' => 'vikas@vikas.vikas','msg' => 'that msg');
-		Yii::app()->runController('site/contactus');
-		$this->expectOutputString('[]');
-	}
-
-	/**
-	 * To test that validations are working on email and showns form when email is not given
-	 * 201212212000:vikas:#202:testing site contactus
-	 */
-	public function testContactusPost3()
-	{
-		$_GET['src'] = 'investvine';
-		$_GET['iframe'] = '1';
-		$_POST['recaptcha_challenge_field'] = 'abc';
-		$_POST['recaptcha_response_field'] = 'abc';
-		$_POST['Contact'] = array('name' => 'vikas','msg' => 'that msg');
-		Yii::app()->runController('site/contactus');
-		$this->assertXpathExists('//form/div/input[@name="Contact[email]"]');
-		$this->assertXpathNotExists('//p/strong[text()="Thanks you for your message."]');
-		//$this->assertOutputContains('Subscription Status: Inactive');
-	}
-
-	/**
-	 * 201212212000:vikas:#202:testing site contactus
-	 */
-	public function testContactus()
-	{
-		$_GET['src'] = 'investvine';
-		$_GET['iframe'] = '1';
-		Yii::app()->runController('site/contactus');
-		$this->assertXpathExists('//form/div/input[@name="Contact[email]"]');
-		//$this->assertOutputContains('Subscription Status: Inactive');
-	}
 
 	/**
 	 *

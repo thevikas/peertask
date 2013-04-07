@@ -32,8 +32,15 @@
 				array('label'=>'Home', 'url'=>array('/site/index')),
 				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
 				array('label'=>'Contact', 'url'=>array('/site/contact')),
+                array('label'=>'Register', 'url'=>array('/register'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest),
+                array('label'=>'List of Objectives', 'url'=>array('/objectives/'), 'visible'=>!Yii::app()->user->isGuest),
+                array('label'=>'Add my New Task', 'url'=>array('/tasks/new'), 'visible'=>!Yii::app()->user->isGuest),
+                array('label'=>'Update Task Logbook', 'url'=>array('/tasks/logbook'), 'visible'=>!Yii::app()->user->isGuest),
+                array('label'=>'New Objective', 'url'=>array('/objectives/new'), 'visible'=>!Yii::app()->user->isGuest),
+                array('label'=>'New Friend', 'url'=>array('/friends/new'), 'visible'=>!Yii::app()->user->isGuest),
+                array('label'=>'Scoreboard', 'url'=>array('/scores'), 'visible'=>!Yii::app()->user->isGuest),
 			),
 		)); ?>
 	</div><!-- mainmenu -->
