@@ -24,7 +24,7 @@
 	<div class="row">
 		<?php echo $form->labelEx($model,'id_frequency'); ?>
 		<?php
-		$olist = CHtml::listData(Frequenct::model()->findAll(), 'id_frequency', 'name');
+		$olist = CHtml::listData(Frequency::model()->findAll(), 'id_frequency', 'name');
 		$options = array(
 		        'tabindex' => '0',
 				'id' => 'combobox',
