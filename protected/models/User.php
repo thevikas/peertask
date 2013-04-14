@@ -74,6 +74,11 @@ class User extends CActiveRecord
 			array('id_user, id_person, username, password, created, updated', 'safe', 'on'=>'search'),
 		);
 	}
+	
+	public function getFriends()
+	{
+	    return $this->person->friends;
+	}
 
 	/**
 	 * @return array relational rules.
@@ -84,6 +89,8 @@ class User extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 		        'objectives' => array(self::HAS_MANY, 'Objective', 'id_user'),
+		        'mytasks' => array(self::HAS_MANY, 'TaskUser', 'id_user'),
+		        'person' => array(self::BELONGS_TO, 'Person', 'id_person'),
 		        //'friends'    => array(self::HAS_MANY, 'Friend', 'condition' => 'id_user in (id_person1,id_person2)'),
 		);
 	}

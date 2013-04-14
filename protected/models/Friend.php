@@ -35,11 +35,12 @@ class Friend extends CActiveRecord
 	
 	public function sendRequest($id_user,$email)
 	{
+	    $user = User::model()->findByPk($id_user);
 	    $m = new Friend(); 
 	    $m->person2email = $email;
 	    $m->person2key = "key1";
 	    $m->requested_date = date('Y-m-d H:i:s');
-	    $m->id_person1 = $id_user;
+	    $m->id_person1 = $user->id_person;
 	    $m->id_person2 = 0;
 	    $m->accepted_date = '';
 	    if(!($rt = $m->save()))
@@ -107,6 +108,7 @@ class Friend extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'person2'=>array(self::BELONGS_TO, 'Person', 'id_person2'),
+	        'person1'=>array(self::BELONGS_TO, 'Person', 'id_person1'),
 		);
 	}
 

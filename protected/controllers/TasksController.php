@@ -59,6 +59,13 @@ class TasksController extends Controller
 		$this->render('index');
 	}
 
+    public function actionShare($id)
+	{
+	    $model=new TaskUser;
+	    $me=User::model()->findByPk(Yii::app()->user->id);
+		$this->render('share',array('model' => $model,'me' => $me));
+	}
+	
 	public function actionLogbook($id)
 	{
 	    $task = self::$dic->get('Task')->findByPk($id);

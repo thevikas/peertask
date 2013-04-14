@@ -111,6 +111,7 @@ class Person extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
             'user'   => array(self::HAS_ONE,   'User','id_person'),
+	        'friends'   => array(self::HAS_MANY,   'Friend','id_person1','condition' => 'id_person2 > 0'),
 		);
 	}
 
