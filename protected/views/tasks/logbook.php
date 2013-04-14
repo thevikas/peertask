@@ -1,14 +1,37 @@
 <?php
-/* @var $this TasksController */
-
-$this->breadcrumbs=array(
-	'Tasks'=>array('/tasks'),
-	'Logbook',
-);
+/* @var $this TaskLogController */
+/* @var $model TaskLog */
+/* @var $form CActiveForm */
 ?>
-<h1><?php echo $this->id . '/' . $this->action->id; ?></h1>
 
-<p>
-	You may change the content of this page by modifying
-	the file <tt><?php echo __FILE__; ?></tt>.
-</p>
+<div class="form">
+
+<?php $form=$this->beginWidget('CActiveForm', array(
+	'id'=>'task-log-create-form',
+	'enableAjaxValidation'=>false,
+)); ?>
+
+	<p class="note">Fields with <span class="required">*</span> are required.</p>
+
+	<?php echo $form->errorSummary($model); ?>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'dated'); ?>
+		<?php echo $form->textField($model,'dated'); ?>
+		<?php echo $form->error($model,'dated'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'comment'); ?>
+		<?php echo $form->textField($model,'comment'); ?>
+		<?php echo $form->error($model,'comment'); ?>
+	</div>
+
+
+	<div class="row buttons">
+		<?php echo CHtml::submitButton('Submit'); ?>
+	</div>
+
+<?php $this->endWidget(); ?>
+
+</div><!-- form -->

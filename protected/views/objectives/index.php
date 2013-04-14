@@ -16,7 +16,17 @@ foreach($objectives as $obj)
 	<?php echo $obj->name . " " . $obj->frequencyname . ' ';
 	echo CHtml::link('edit',array('/objectives/update','id' => $obj->id_objective)) . ' ';
 	echo CHtml::link('Add Task',array('/tasks/new','id_objective' => $obj->id_objective)) . ' ';
-        echo $this->renderPartial("_tasks",array('tasks' => $obj->tasks));
+        
+        if(isset($obj->tasklogs[0]))
+        {
+            ?>
+            <strong>
+            <?php echo $obj->tasklogs[0]->dated . ' - ' .  $obj->tasklogs[0]->comment;?>
+            </strong>
+            <?php 
+        }
+
+                echo $this->renderPartial("_tasks",array('tasks' => $obj->tasks));
         ?>
     </li>
     <?php 

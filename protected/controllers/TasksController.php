@@ -59,9 +59,25 @@ class TasksController extends Controller
 		$this->render('index');
 	}
 
-	public function actionLogbook()
+	public function actionLogbook($id)
 	{
-		$this->render('logbook');
+	    $task = self::$dic->get('Task')->findByPk($id);
+		$model=new TaskLog;
+		$model->id_task = $task->id_task;
+		$model->id_objective = $task->id_objective;
+		$model->id_user = Yii::app()->user->id;
+		$model->dated = $this->getDatestring();
+    
+        if(isset($_POST['TaskLog']))
+        {
+            $model->attributes=$_POST['TaskLog'];
+            if($model->validate())
+            {
+                $model->save();
+                $this->redirect(array('/objectives/index'));
+            }
+        }
+        $this->render('logbook',array('model'=>$model));
 	}
 
 	public function actionNew($id_objective = 0)

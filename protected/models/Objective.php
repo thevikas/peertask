@@ -73,7 +73,7 @@ class Objective extends CActiveRecord
 		return array(
 	           'tasks'=>array(self::HAS_MANY, 'Task', 'id_objective'),
                'frequency'=>array(self::BELONGS_TO, 'Frequency', 'id_frequency'),
-		       'tasklogs'=>array(self::HAS_MANY, 'TaskLog', 'id_objective'),
+		       'tasklogs'=>array(self::HAS_MANY, 'TaskLog', 'id_objective','order' => 'id_tlog desc'),
 		);
 	}
 
