@@ -20,15 +20,4 @@ class m130414_113634_task_user extends CDbMigration
 	{
 		$this->execute('drop table task_user');
 	}
-
-	/*
-	// Use safeUp/safeDown to do migration with transaction
-	public function safeUp()
-	{
-	}
-
-	public function safeDown()
-	{
-	}
-	*/
 }

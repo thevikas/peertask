@@ -17,14 +17,4 @@ class m130131_035700_create_friend extends CDbMigration
 		$this->execute('drop table friend');
 	}
 
-	/*
-	// Use safeUp/safeDown to do migration with transaction
-	public function safeUp()
-	{
-	}
-
-	public function safeDown()
-	{
-	}
-	*/
 }

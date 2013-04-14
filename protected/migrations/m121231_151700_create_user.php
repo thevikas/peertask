@@ -22,14 +22,4 @@ class m121231_151700_create_user extends CDbMigration
 		$this->execute("drop table user");
 	}
 
-	/*
-	// Use safeUp/safeDown to do migration with transaction
-	public function safeUp()
-	{
-	}
-
-	public function safeDown()
-	{
-	}
-	*/
 }

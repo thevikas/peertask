@@ -112,6 +112,7 @@ class Person extends CActiveRecord
 		return array(
             'user'   => array(self::HAS_ONE,   'User','id_person'),
 	        'friends'   => array(self::HAS_MANY,   'Friend','id_person1','condition' => 'id_person2 > 0'),
+		    'pending_friend_requests' => array(self::HAS_MANY,   'Friend',array('person2email' => 'email'),'condition' => 'id_person2 = 0'),
 		);
 	}
 

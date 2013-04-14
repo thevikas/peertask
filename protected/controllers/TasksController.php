@@ -59,10 +59,26 @@ class TasksController extends Controller
 		$this->render('index');
 	}
 
-    public function actionShare($id)
+    public function actionShare($id=0)
 	{
 	    $model=new TaskUser;
+	    if($id)
+	        $model->id_task = $id;
 	    $me=User::model()->findByPk(Yii::app()->user->id);
+	    
+	    if(isset($_POST['TaskUser']))
+	    {
+	        $model->attributes=$_POST['TaskUser'];
+	        $model->rel = TaskUser::REL_SHAREDOWNER;
+	        $model->dated = $this->getDatestring();
+	        $model->status = 0;
+	        $model->id_from_user = Yii::app()->user->id;
+	        if($model->validate())
+	        {
+	            $model->save();
+	            $this->redirect(array('/objectives/index'));
+	        }
+	    }
 		$this->render('share',array('model' => $model,'me' => $me));
 	}
 	

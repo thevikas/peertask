@@ -14,6 +14,10 @@
  */
 class TaskUser extends CActiveRecord
 {
+    const REL_SHAREDOWNER = 'SharedOwner';
+    const REL_OWNER = 'Owner';
+    const REL_SENT = 'Sent';
+    
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -41,7 +45,7 @@ class TaskUser extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('id_task, id_user, dated, rel, status, id_from_user', 'required'),
-			array('id_task, id_user, rel, status, id_from_user', 'numerical', 'integerOnly'=>true),
+			array('id_task, id_user, status, id_from_user', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_taskuser, id_task, id_user, dated, rel, status, id_from_user', 'safe', 'on'=>'search'),

@@ -16,14 +16,4 @@ class m130131_035334_create_objective extends CDbMigration
 		$this->execute('drop table objective');
 	}
 
-	/*
-	// Use safeUp/safeDown to do migration with transaction
-	public function safeUp()
-	{
-	}
-
-	public function safeDown()
-	{
-	}
-	*/
 }

@@ -18,7 +18,7 @@
 	<div class="row">
 		<?php echo $form->labelEx($model,'id_user'); ?>
 		<?php
-		$person_list = CHtml::listData($me->person->friends, 'id_person2', 'name');
+		$person_list = CHtml::listData($me->person->friends, 'id_person2', 'fullname');
 		$options = array(
 		        'tabindex' => '0',
 				'id' => 'combobox',
@@ -33,7 +33,7 @@
 	<div class="row">
 		<?php echo $form->labelEx($model,'id_task'); ?>
 		<?php
-		$olist = CHtml::listData($me->mytasks, 'id_task', 'name');
+		$olist = CHtml::listData($me->mytasks, 'id_task', 'task.name');
 		$options = array(
 		        'tabindex' => '0',
 				'id' => 'combobox',

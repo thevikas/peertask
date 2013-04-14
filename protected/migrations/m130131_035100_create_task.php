@@ -17,14 +17,4 @@ class m130131_035100_create_task extends CDbMigration
 		$this->execute('drop table task');
 	}
 
-	/*
-	// Use safeUp/safeDown to do migration with transaction
-	public function safeUp()
-	{
-	}
-
-	public function safeDown()
-	{
-	}
-	*/
 }

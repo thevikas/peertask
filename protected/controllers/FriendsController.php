@@ -2,9 +2,34 @@
 
 class FriendsController extends Controller
 {
-	public function actionAccept()
+	public function actionAccept($id,$status = 'yes')
 	{
-		$this->render('accept');
+	    $friend = Friend::model()->findByPk($id);
+	    if($friend->person2email != Yii::app()->user->person->email)
+	    {
+	        Yii::log("not your friend record:$id for user:" . Yii::app()->user->id,"error");
+	        return false;
+	    }
+	    if(Friend::STATUS_PENDING != $friend->status)
+	    {
+	        Yii::log("status of friendship is not pending, ignoring ($id)","warning");
+	        $this->redirect(array('/friends'));
+	    }
+	    if('yes' == $status)
+	    {
+	        $friend->status = Friend::STATUS_ACCEPTED;
+	        $friend->id_person2 = Yii::app()->user->id_person;
+	    }
+	    else
+	    {
+	        $friend->status = Friend::STATUS_REFUSED;
+	    }
+	    $friend->responded_date = $this->getDatestring();
+	    if(!$friend->save())
+	    {
+	        print_r($friend->getErrors());
+	    }
+	    $this->redirect(array('/friends'));
 	}
 
 	public function actionIndex()

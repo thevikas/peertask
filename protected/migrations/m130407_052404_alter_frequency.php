@@ -27,14 +27,4 @@ class m130407_052404_alter_frequency extends CDbMigration
                     DROP  `phpstrtotime`");
 	}
 
-	/*
-	// Use safeUp/safeDown to do migration with transaction
-	public function safeUp()
-	{
-	}
-
-	public function safeDown()
-	{
-	}
-	*/
 }

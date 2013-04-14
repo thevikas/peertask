@@ -22,14 +22,4 @@ class m130407_042449_new_frequency extends CDbMigration
 		
 	}
 
-	/*
-	// Use safeUp/safeDown to do migration with transaction
-	public function safeUp()
-	{
-	}
-
-	public function safeDown()
-	{
-	}
-	*/
 }

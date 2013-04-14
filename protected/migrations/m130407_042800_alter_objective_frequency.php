@@ -12,14 +12,4 @@ class m130407_042800_alter_objective_frequency extends CDbMigration
 		$this->execute("ALTER TABLE  `objective` DROP  `id_frequency`");
 	}
 
-	/*
-	// Use safeUp/safeDown to do migration with transaction
-	public function safeUp()
-	{
-	}
-
-	public function safeDown()
-	{
-	}
-	*/
 }

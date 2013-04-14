@@ -12,14 +12,4 @@ class m130414_103523_tlog_comment extends CDbMigration
 		$this->execute('ALTER TABLE  `tlog` DROP  `comment` VARCHAR( 255 ) NOT NULL');
 	}
 
-	/*
-	// Use safeUp/safeDown to do migration with transaction
-	public function safeUp()
-	{
-	}
-
-	public function safeDown()
-	{
-	}
-	*/
 }

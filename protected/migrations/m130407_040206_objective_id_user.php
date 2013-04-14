@@ -12,14 +12,4 @@ class m130407_040206_objective_id_user extends CDbMigration
 		$this->execute("ALTER TABLE  `objective` DROP  `id_user`");
 	}
 
-	/*
-	// Use safeUp/safeDown to do migration with transaction
-	public function safeUp()
-	{
-	}
-
-	public function safeDown()
-	{
-	}
-	*/
 }

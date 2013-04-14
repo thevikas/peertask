@@ -5,13 +5,8 @@ class m121231_151248_create_person extends CDbMigration
 	public function up()
 	{
 		$this->execute("CREATE TABLE  `person` (
-<<<<<<< HEAD
 				`id_person` int(11) unsigned NOT NULL AUTO_INCREMENT,
 	 		        `created` datetime NOT NULL,
-=======
-				`id_person` int(11) NOT NULL AUTO_INCREMENT,					  
-		        `created` datetime NOT NULL,
->>>>>>> 8b74c6c2828a7de235fe07ac604a9287df1b02b0
 				`updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 				`first_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
 				`last_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
