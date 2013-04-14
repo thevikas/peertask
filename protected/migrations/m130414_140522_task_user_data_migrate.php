@@ -1,6 +1,6 @@
 <?php
 
-class m130414_140522_task_user_dat_migrate extends CDbMigration
+class m130414_140522_task_user_data_migrate extends CDbMigration
 {
 	public function up()
 	{
