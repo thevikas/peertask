@@ -4,7 +4,7 @@
 $this->pageTitle=Yii::app()->name;
 ?>
 
-<h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?>, <?php Yii::app()->user->fullname?></i></h1>
+<h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?>, <?php if(Yii::app()->user->id>0) echo Yii::app()->user->fullname;?></i></h1>
 
 <?php
 if(Yii::app()->user->id > 0)
