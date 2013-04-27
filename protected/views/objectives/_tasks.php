@@ -9,6 +9,16 @@ foreach($tasks as $t)
 	echo CHtml::link('delete',array('/tasks/delete','id' => $t->id_task)) . ' ';
 	echo CHtml::link('log',array('/tasks/logbook','id' => $t->id_task)) . ' ';
 	echo CHtml::link('share',array('/tasks/share','id' => $t->id_task)) . ' ';
+	
+	if($t->mytask->rel == TaskUser::REL_SHAREDOWNER)
+	{
+	    $mytask = $t->mytask;
+	    echo "From: " . $mytask->fromuser->person->fullname . ' ';
+	    if($mytask->status == TaskUser::STATUS_PENDING)
+	    {
+	        echo CHtml::link('accept',array('/tasks/accept','id' => $mytask->id_taskuser)) . ' ';
+	    }
+	}
         ?>
     </li>
     <?php 

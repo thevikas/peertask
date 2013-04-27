@@ -18,14 +18,13 @@ class Friend extends CActiveRecord
     const STATUS_REFUSED = 'Refused';
     const STATUS_PENDING = 'Pending';
     
-    public function byuser($id_user)
+    public function byuser($id_person)
     {
-        $user = User::model()->findByPk($id_user);
-        $person_id = $user->id_person;
-
+        echo "searching for friends if id_person1=$id_person";
+        
         $this->getDbCriteria()->mergeWith(array(
-                'condition'=>':personid in (id_person1,id_person2)',
-                'params' => array(':personid' => $person_id),
+                'condition'=>':personid in (id_person1)',
+                'params' => array(':personid' => $id_person),
         ));
         return $this;
     }
@@ -49,7 +48,6 @@ class Friend extends CActiveRecord
         $m->requested_date = date('Y-m-d H:i:s');
         $m->id_person1 = $user->id_person;
         $m->id_person2 = 0;
-        $m->accepted_date = '';
         $m->status = self::STATUS_PENDING;
         if(!($rt = $m->save()))
         {

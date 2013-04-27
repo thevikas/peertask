@@ -29,13 +29,29 @@ class FriendsController extends Controller
 	    {
 	        print_r($friend->getErrors());
 	    }
+	    if(Friend::STATUS_ACCEPTED == $friend->status)
+	    {
+	        //add a second record with flipped person1 and person2 records
+	        $friend2 = new Friend();
+	        $friend2->id_person1 = $friend->id_person2;
+	        $friend2->id_person2 = $friend->id_person1;
+	        $friend2->person2email = 'accepted@email.com';
+	        $friend2->person2key = 'key';
+	        $friend2->status = $friend->status;
+	        $friend2->requested_date = $this->getDatestring();
+	        if(!$friend2->save())
+	        {
+	            print_r($friend2->getErrors());
+	            die;
+	        }
+	    }
 	    $this->redirect(array('/friends'));
 	}
 
 	public function actionIndex()
 	{
 	    echo "userid:" . Yii::app()->user->id;
-		$friends = self::$dic->get('Friend')->byuser(Yii::app()->user->id)->findAll();
+		$friends = self::$dic->get('Friend')->byuser(Yii::app()->user->person->id_person)->findAll();
 		$this->render('index',array('friends' => $friends));
 	}
 

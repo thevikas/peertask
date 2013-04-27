@@ -18,7 +18,7 @@
 	<div class="row">
 		<?php echo $form->labelEx($model,'id_user'); ?>
 		<?php
-		$person_list = CHtml::listData($me->person->friends, 'id_person2', 'fullname');
+		$person_list = CHtml::listData($me->person->friends, 'person2.user.id_user', 'fullname');
 		$options = array(
 		        'tabindex' => '0',
 				'id' => 'combobox',

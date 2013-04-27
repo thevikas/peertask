@@ -30,7 +30,17 @@ class Objective extends CActiveRecord
         return $this;
 	}
 
-	/**
+	public function bytaskuser($id_user)
+	{
+        $this->getDbCriteria()->mergeWith(array(
+                'with' => arrAY('tasks','tasks.mytask'),
+                'condition'=>"mytask.id_user = :userid and mytask.status in ('Active','Pending')",
+        		'params' => array(':userid' => $id_user),
+        ));
+        return $this;
+	}
+
+    /**
 	 * @return string the associated database table name
 	 */
 	public function tableName()

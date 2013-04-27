@@ -54,6 +54,7 @@ class Task extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 		        'tasklogs'=>array(self::HAS_MANY, 'TaskLog', 'id_task'),
+		        'mytask'=>array(self::HAS_ONE, 'TaskUser', 'id_task','condition' => 'mytask.id_user = ' . Yii::app()->user->id),
 		        'objective'=>array(self::BELONGS_TO, 'Objective', 'id_objective'),
 		        //'user'=>array(self::BELONGS_TO, 'User', 'id_user'),
 		);
