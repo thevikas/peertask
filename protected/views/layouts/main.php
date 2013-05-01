@@ -42,6 +42,8 @@
                 array('label'=>'New Objective', 'url'=>array('/objectives/new'), 'visible'=>!Yii::app()->user->isGuest),
                 array('label'=>'New Friend', 'url'=>array('/friends/new'), 'visible'=>!Yii::app()->user->isGuest),
                 array('label'=>'Scoreboard', 'url'=>array('/scores'), 'visible'=>!Yii::app()->user->isGuest),
+		        //array('label'=>'Github', 'url'=>'https://github.com/thevikas/peertask'),
+			        
 			),
 		)); ?>
 	</div><!-- mainmenu -->

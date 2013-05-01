@@ -13,7 +13,7 @@ foreach($objectives as $obj)
 {
     ?>
     <li>
-	<?php echo $obj->name . " " . $obj->frequencyname . ' ';
+	<strong><?php echo $obj->name . " " . $obj->frequencyname . '</strong> ';
 	echo CHtml::link('edit',array('/objectives/update','id' => $obj->id_objective)) . ' ';
 	echo CHtml::link('Add Task',array('/tasks/new','id_objective' => $obj->id_objective)) . ' ';
         

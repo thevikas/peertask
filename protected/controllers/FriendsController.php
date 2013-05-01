@@ -31,6 +31,8 @@ class FriendsController extends Controller
 	    }
 	    if(Friend::STATUS_ACCEPTED == $friend->status)
 	    {
+	        Log::model()->logAcceptFriend($friend);
+	        
 	        //add a second record with flipped person1 and person2 records
 	        $friend2 = new Friend();
 	        $friend2->id_person1 = $friend->id_person2;
@@ -70,8 +72,9 @@ class FriendsController extends Controller
 	    
 	    if(isset($_POST['Friend']))
         {
-            if($model->sendRequest(Yii::app()->user->id,$_POST['Friend']['person2email']))
+            if($friend = $model->sendRequest(Yii::app()->user->id,$_POST['Friend']['person2email']))
             {
+                Log::model()->logAddFriend($friend);
                 $this->render('requestsent');
                 return;
             }
