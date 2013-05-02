@@ -63,6 +63,7 @@ class ObjectivesController extends Controller
             {
                 // form inputs are valid, do something here
                 $model->save();
+                Log::model()->logAddObjective($model);
                 $this->render('newsaved',array('model'=>$model));
                 return;
             }

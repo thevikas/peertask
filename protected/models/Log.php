@@ -12,10 +12,10 @@
  */
 class Log extends CActiveRecord
 {
-    const L_ADDFRIEND        = 1;
-    const L_ACCEPTFRIEND     = 2;
-    const L_ADDOBJECTIVE     = 3;
-    const L_ADDTASK          = 4;
+    const L_ADDFRIEND        = 1; //20130401
+    const L_ACCEPTFRIEND     = 2; //20130401
+    const L_ADDOBJECTIVE     = 3; //20130402
+    const L_ADDTASK          = 4; //20130402
     const L_COMPLETETASK     = 5;
     const L_PARTIALCOMPLETE  = 6;
     const L_SHARETASK        = 7;
@@ -53,15 +53,15 @@ class Log extends CActiveRecord
         $this->logthis(self::L_ACCEPTFRIEND,$friend->person2->user->id_user,$params);
     }
     
-	public function logAddObjective($id_objective)
+	public function logAddObjective(Objective $obj)
     {
-        $params = array('id_objective' => $id_objective);
+        $params = array('id_objective' => $obj->id_objective);
         return $this->logthis(self::L_ADDOBJECTIVE,Yii::app()->user->id,$params);
     }
     
-    public function logAddTask($id_task)
+    public function logAddTask(Task $task)
     {
-        $params = array('id_task' => $id_task);
+        $params = array('id_task' => $task->id_task);
         return $this->logthis(self::L_ADDTASK,Yii::app()->user->id,$params);
     }
     

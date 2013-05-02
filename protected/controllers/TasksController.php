@@ -136,7 +136,10 @@ class TasksController extends Controller
                 if(!$model->save())
                 {
                     Yii::log("saving new task failed","error");
+                    return false;
                 }
+                else
+                    Log::model()->logAddTask($model);
                 
                 $model2 = new TaskUser();
                 $model2->rel = TaskUser::REL_OWNER;
@@ -149,6 +152,7 @@ class TasksController extends Controller
                     if(!$model2->save())
                     {
                         Yii::log("saving new task failed","error");
+                        return false;
                     }
                 }
                 //also add the task in task user

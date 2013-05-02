@@ -13,7 +13,7 @@ if(Yii::app()->user->id > 0)
     echo '<ol>';
     foreach(Yii::app()->user->person->pending_friend_requests as $friend)
     {
-         echo '<li>' . $friend->person1->fullname;
+         echo '<li>' . $friend->person1->fullname . ' ' . $friend->person1->email;
          echo ' ' . CHtml::link('accept',array('friends/accept','id' => $friend->id_friend));
          echo ' ' . CHtml::link('refuse',array('friends/accept','id' => $friend->id_friend,'status' => 'no'));
          echo '</li>';
