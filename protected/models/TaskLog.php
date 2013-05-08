@@ -9,6 +9,8 @@
  * @property string $dated
  * @property integer $id_user
  * @property integer $comment
+ * @property integer $percent
+ * @property integer $val
  */
 class TaskLog extends CActiveRecord
 {
@@ -39,7 +41,7 @@ class TaskLog extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('id_task, id_objective, dated, id_user', 'required'),
-			array('id_task, id_objective, id_user', 'numerical', 'integerOnly'=>true),
+			array('val, id_task, percent, id_objective, id_user', 'numerical', 'integerOnly'=>true),
 		    array('comment','length','max' => 255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -72,6 +74,8 @@ class TaskLog extends CActiveRecord
 			'dated' => 'Dated',
 			'id_user' => 'Id User',
 		    'comment' => 'Comments',
+		    'percent' => 'Percent Completed',
+		    'val' => 'Value of progress',
 		);
 	}
 

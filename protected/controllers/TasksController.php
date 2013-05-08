@@ -64,6 +64,7 @@ class TasksController extends Controller
         $model=new TaskUser;
         if($id)
             $model->id_task = $id;
+        
         $me=User::model()->findByPk(Yii::app()->user->id);
          
         if(isset($_POST['TaskUser']))
@@ -76,6 +77,7 @@ class TasksController extends Controller
             if($model->validate())
             {
                 $model->save();
+                Log::model()->logShareTask($model);
                 $this->redirect(array('/objectives/index'));
             }
         }
@@ -87,6 +89,7 @@ class TasksController extends Controller
         $model=TaskUser::model()->findByPk($id);
         $model->status = TaskUser::STATUS_ACTIVE;
         $model->update(array('status'));
+        Log::model()->logAcceptTask($model);
         $this->redirect(array('/objectives/index'));
     }
     

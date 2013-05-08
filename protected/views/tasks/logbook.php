@@ -27,7 +27,18 @@
 		<?php echo $form->error($model,'comment'); ?>
 	</div>
 
-
+	<div class="row">
+		<?php echo $form->labelEx($model,'percent'); ?>
+		<?php echo $form->textField($model,'percent'); ?>
+		<?php echo $form->error($model,'percent'); ?>
+	</div>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'val'); ?>
+		<?php echo $form->textField($model,'val'); ?>
+		<?php echo $form->error($model,'val'); ?>
+	</div>
+	
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Submit'); ?>
 	</div>
