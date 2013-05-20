@@ -203,7 +203,7 @@ class SiteController extends Controller
 
     public function actionCron()
     {
-        Log::model()->deleteAll();
+        //Log::model()->deleteAll();
         
         //locate incomplete daily tasks
         //log incomplete tasks        
