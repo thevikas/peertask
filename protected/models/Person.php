@@ -13,6 +13,7 @@
  * @property string $dob
  * @property integer $gender
  * @property string $source
+ * @property integet $score
  */
 class Person extends CActiveRecord
 {
@@ -92,7 +93,7 @@ class Person extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('created, updated, first_name, last_name, email, dob, gender', 'required'),
-			array('gender', 'numerical', 'integerOnly'=>true),
+			array('gender,score', 'numerical', 'integerOnly'=>true),
 			array('first_name, last_name, email, source', 'length', 'max'=>50),
 			array('email', 'email'),
 			array('email', 'unique','message' => 'The email address is already registered. Please login instead.'),
@@ -111,7 +112,8 @@ class Person extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
             'user'   => array(self::HAS_ONE,   'User','id_person'),
-	        'friends'   => array(self::HAS_MANY,   'Friend','id_person1','condition' => 'id_person2 > 0'),
+	        //'friends'   => array(self::HAS_MANY,   'Friend','id_person1','condition' => 'id_person2 > 0'),
+	        'friends' => array(self::MANY_MANY, 'Person','friend(id_person1,id_person2)','condition' => 'id_person2 > 0'),
 		    'pending_friend_requests' => array(self::HAS_MANY,   'Friend',array('person2email' => 'email'),'condition' => 'id_person2 = 0'),
 		);
 	}
@@ -131,6 +133,7 @@ class Person extends CActiveRecord
 			'dob' => 'Dob',
 			'gender' => 'Gender',
 			'source' => 'Source',
+	        'score' => 'Score',
 		);
 	}
 

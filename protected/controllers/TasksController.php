@@ -108,6 +108,7 @@ class TasksController extends Controller
             if($model->validate())
             {
                 $model->save();
+                Log::model()->logCompleteTask($model);
                 $this->redirect(array('/objectives/index'));
             }
         }

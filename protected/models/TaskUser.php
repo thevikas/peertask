@@ -2,7 +2,10 @@
 
 /**
  * This is the model class for table "task_user".
- *
+ * 
+insert into task_user(id_task,id_user,rel,status,id_from_user)
+select id_task,o.id_user,'Owner','Active',o.id_user from task t join objective o on o.id_objective=t.id_objective
+
  * The followings are the available columns in table 'task_user':
  * @property integer $id_taskuser
  * @property integer $id_task

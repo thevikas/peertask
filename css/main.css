@@ -227,3 +227,12 @@ div.search-form
 {
 	background: #80CFFF;
 }
+div.scorebox
+{
+    float:right; 
+}
+div.scorebox h2
+{
+    color: blue;
+    font-weight: bold;
+}

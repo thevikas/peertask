@@ -16,11 +16,33 @@ class Log extends CActiveRecord
     const L_ACCEPTFRIEND     = 2; //20130401
     const L_ADDOBJECTIVE     = 3; //20130402
     const L_ADDTASK          = 4; //20130402
-    const L_COMPLETETASK     = 5;
+    const L_COMPLETETASK     = 5; //20130520
     const L_PARTIALCOMPLETE  = 6;
     const L_SHARETASK        = 7;
     const L_ACCEPTTASK       = 8;
     const L_INVITEUSER       = 9;
+    const L_FAILTASKDAILY    = 10; //20130520
+    const L_FAILTASKWEEKLY   = 11;
+    const L_FAILTASKMONTHLY  = 12;
+    const L_FAILTASKFRIEND   = 13;      
+    
+    
+    var $logtypes = array(
+                self::L_ADDFRIEND,
+                self::L_ACCEPTFRIEND,
+                self::L_ADDOBJECTIVE,
+                self::L_ADDTASK,
+                self::L_COMPLETETASK,
+                self::L_PARTIALCOMPLETE,
+                self::L_SHARETASK,
+                self::L_ACCEPTTASK,
+                self::L_INVITEUSER,
+                self::L_FAILTASKDAILY,
+                self::L_FAILTASKWEEKLY,
+                self::L_FAILTASKMONTHLY,
+                self::L_FAILTASKFRIEND,
+            );
+    
     
     public function logthis($logtype,$id_user,$params)
     {
@@ -29,6 +51,10 @@ class Log extends CActiveRecord
         $log->id_user = $id_user;
         $log->params = serialize($params);
         $log->dated = Controller::getDatestring();
+        
+        if(isset($params['id_task']))
+            $log->id_task = $params['id_task'];
+        
         $rt = $log->save();
         if(!$rt)
             Yii::log("error while saving log:" . var_export($log->getErrors(),true));
@@ -65,9 +91,9 @@ class Log extends CActiveRecord
         return $this->logthis(self::L_ADDTASK,Yii::app()->user->id,$params);
     }
     
-    public function logCompleteTask($id_task)
+    public function logCompleteTask(TaskLog $tasklog)
     {
-        $params = array('id_task' => $id_task);
+        $params = array('id_task' => $tasklog->id_task);
         return $this->logthis(self::L_COMPLETETASK,Yii::app()->user->id,$params);
     }
     
@@ -77,15 +103,27 @@ class Log extends CActiveRecord
         return $this->logthis(self::L_PARTIALCOMPLETE,Yii::app()->user->id,$params);
     }
     
-    public function logShareTask($id_task)
+    public function logTaskFail(Objective $obj,$id_user)
     {
-        $params = array('id_task' => $id_task);
+        $params = array('id_objective' => $obj->id_objective);
+        return $this->logthis(self::L_FAILTASKDAILY,$id_user,$params);
+    }
+    
+    public function logTaskFailFriend(Objective $obj,$id_user)
+    {
+        $params = array('id_objective' => $obj->id_objective);
+        return $this->logthis(self::L_FAILTASKFRIEND,$id_user,$params);
+    }
+    
+    public function logShareTask(TaskUser $tu)
+    {
+        $params = array('id_task' => $tu->id_task);
         return $this->logthis(self::L_SHARETASK,Yii::app()->user->id,$params);        
     }
     
-    public function logAcceptTask($id_task)
+    public function logAcceptTask(TaskUser $tu)
     {
-        $params = array('id_task' => $id_task);
+        $params = array('id_task' => $tu->id_task);
         return $this->logthis(self::L_ACCEPTTASK,Yii::app()->user->id,$params);
     }
     

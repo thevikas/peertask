@@ -28,11 +28,14 @@ class Controller extends CController
     	return !Yii::app()->user->getIsGuest();
     }
     
-    public static function getDatestring()
+    public static function getDatestring($dt = 0)
     {
-        return date('Y-m-d H:i:s');
+        if(!$dt) 
+            $dt = time();
+        
+        return date('Y-m-d H:i:s',$dt);
     }
-
+    
     /**
      * Returns new SendMail object
      * @return SendMail
