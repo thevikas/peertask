@@ -11,7 +11,7 @@ foreach($friends as $f)
 {
     ?>
     <li>
-    <?php echo $f->fullname;?>, <?php echo $f->status;?>
+    <?php echo $f->fullname;?>, <?php echo $f->status;?> - <?php if(isset($f->person2)) echo $f->person2->score;?>
     </li>
     <?php
 }
