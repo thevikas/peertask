@@ -36,10 +36,23 @@ class ObjectivesController extends Controller
         ));
     }
 
-    public function actionIndex()
+    public function actionIndex($show = 'all')
     {
+        $allactive =  $mineactive = $sharedactive = '';
+        switch($show)
+        {
+            case 'all':
+                $allactive = 'active';
+                break;
+            case 'mine':
+                $mineactive = 'active';
+                break;
+            case 'shared':
+                $sharedactive = 'active';
+                break;
+        }
         $obs = self::$dic->get('Objective')->bytaskuser(Yii::app()->user->id)->findAll();
-        $this->render('index',array('objectives' => $obs));
+        $this->render('index',array('objectives' => $obs,'allactive' => $allactive,'sharedactive' =>$sharedactive,'mineactive' => $mineactive));
     }
 
     public function actionNew()

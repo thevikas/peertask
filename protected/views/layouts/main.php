@@ -39,13 +39,11 @@
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest),
 		array('label'=>'Objectives', 'url'=>array('/objectives/'), 'visible'=>!Yii::app()->user->isGuest),
 		array('label'=>'Friends', 'url'=>array('/friends/'), 'visible'=>!Yii::app()->user->isGuest),
-                array('label'=>'Add my New Task', 'url'=>array('/tasks/new'), 'visible'=>!Yii::app()->user->isGuest),
-                array('label'=>'Update Task Logbook', 'url'=>array('/tasks/logbook'), 'visible'=>!Yii::app()->user->isGuest),
+                array('label'=>'Add my New Task', 'url'=>array('/tasks/new'), 'visible'=>!Yii::app()->user->isGuest),                
                 array('label'=>'New Objective', 'url'=>array('/objectives/new'), 'visible'=>!Yii::app()->user->isGuest),
                 array('label'=>'New Friend', 'url'=>array('/friends/new'), 'visible'=>!Yii::app()->user->isGuest),
                 array('label'=>'Scoreboard', 'url'=>array('/scores'), 'visible'=>!Yii::app()->user->isGuest),
-		        //array('label'=>'Github', 'url'=>'https://github.com/thevikas/peertask'),
-			        
+		        //array('label'=>'Github', 'url'=>'https://github.com/thevikas/peertask'),			        
 			),
 		)); ?>
 	</div><!-- mainmenu -->

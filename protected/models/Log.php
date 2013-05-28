@@ -25,6 +25,7 @@ class Log extends CActiveRecord
     const L_FAILTASKWEEKLY   = 11;
     const L_FAILTASKMONTHLY  = 12;
     const L_FAILTASKFRIEND   = 13;      
+    const L_UPDATEDSCORE     = 14;
     
     
     var $logtypes = array(
@@ -41,6 +42,7 @@ class Log extends CActiveRecord
                 self::L_FAILTASKWEEKLY,
                 self::L_FAILTASKMONTHLY,
                 self::L_FAILTASKFRIEND,
+                self::L_UPDATEDSCORE,
             );
     
     
@@ -59,6 +61,12 @@ class Log extends CActiveRecord
         if(!$rt)
             Yii::log("error while saving log:" . var_export($log->getErrors(),true));
         return $rt;
+    }
+    
+    public function logUpdateScore(Person $person)
+    {
+        $params = array('score' => $person->score);
+        $this->logthis(self::L_UPDATEDSCORE,$person->user->id_user,$params);                
     }
     
     public function logAddFriend($friend)

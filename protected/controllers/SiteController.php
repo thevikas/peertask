@@ -302,7 +302,6 @@ class SiteController extends Controller
         }
         
         print_r($userscore); 
-        //die;
         
         foreach($userscore as $uid => $s)
         {
@@ -313,6 +312,7 @@ class SiteController extends Controller
             $person = $user->person;
             $person->score = $s;
             $person->update(array('score'));
+            Log::model()->logUpdateScore($person);
         }
     }
 }

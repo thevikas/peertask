@@ -236,3 +236,22 @@ div.scorebox h2
     color: blue;
     font-weight: bold;
 }
+div.linkbox a
+{
+    text-align: center;
+     width: 50px;
+     float:right;
+     display: block;
+     padding: 2px;
+     background-color: yellow;
+     border: solid 1px black;
+}
+div.linkbox a.active
+{
+    background-color: blue;
+    color: white; 
+}
+div.linkbox > a
+{
+    f3loat: none; 
+}
