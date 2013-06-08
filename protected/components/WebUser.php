@@ -30,8 +30,12 @@ class WebUser extends CWebUser {
     // access it by Yii::app()->user->first_name
     function getPerson()
     {
-        $user = $this->loadUser(Yii::app()->user->id);
-        return $user->person;
+        if(Yii::app()->user->id)
+        {
+            $user = $this->loadUser(Yii::app()->user->id);
+            return $user->person;
+        }
+        return new Person();   
     }
 
     // Return first name.

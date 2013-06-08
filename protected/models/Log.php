@@ -63,6 +63,25 @@ class Log extends CActiveRecord
         return $rt;
     }
     
+    public function bytype($id_type)
+    {
+        $this->getDbCriteria()->mergeWith(array(
+                'condition'=>'logtype = :logtype',
+                'params' => array(':logtype' => $id_type),
+        ));
+        return $this;
+    }
+    
+    public function byuser($id_user)
+    {
+        $this->getDbCriteria()->mergeWith(array(
+                'condition'=>'id_user = :userid',
+                'params' => array(':userid' => $id_user),
+                'order' => 'dated desc',
+        ));
+        return $this;
+    }
+    
     public function logUpdateScore(Person $person)
     {
         $params = array('score' => $person->score);

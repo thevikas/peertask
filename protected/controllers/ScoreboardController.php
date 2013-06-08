@@ -4,7 +4,10 @@ class ScoreboardController extends Controller
 {
 	public function actionIndex()
 	{
-		$this->render('index');
+	    //list the user's scrore history
+	    $logs = Log::model()->byuser(Yii::app()->user->id)->bytype(Log::L_UPDATEDSCORE)->findAll();
+	    //print_r($logs[0]);
+		$this->render('index',array('logs' => $logs));
 	}
 
 	// Uncomment the following methods and override them if needed
