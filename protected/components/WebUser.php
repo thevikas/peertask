@@ -33,7 +33,8 @@ class WebUser extends CWebUser {
         if(Yii::app()->user->id)
         {
             $user = $this->loadUser(Yii::app()->user->id);
-            return $user->person;
+            if($user)
+                return $user->person;
         }
         return new Person();   
     }

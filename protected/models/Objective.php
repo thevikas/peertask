@@ -24,8 +24,17 @@ class Objective extends CActiveRecord
 	public function byuser($id_user)
 	{
         $this->getDbCriteria()->mergeWith(array(
-                'condition'=>'id_user = :userid',
+                'condition'=>'id_user = :userid or id_from_user = :userid',
         		'params' => array(':userid' => $id_user),
+        ));
+        return $this;
+	}
+	
+	public function byrelation($rel)
+	{
+	    $this->getDbCriteria()->mergeWith(array(
+                'condition'=>"rel = :rel",
+        		'params' => array(':rel' => $rel),
         ));
         return $this;
 	}
@@ -40,7 +49,25 @@ class Objective extends CActiveRecord
         return $this;
 	}
 
-    /**
+    public function byanyuser($id_user)
+	{
+        $this->getDbCriteria()->mergeWith(array(
+                'with' => arrAY('tasks','tasks.alltask'),
+        ));
+        return $this;
+	}
+	
+	public function fromuser($id_user)
+	{
+        $this->getDbCriteria()->mergeWith(array(
+                'with' => arrAY('tasks','tasks.shared'),
+                'condition'=>"shared.id_from_user = :userid and shared.status in ('Active','Pending')",
+        		'params' => array(':userid' => $id_user),
+        ));
+        return $this;
+	}
+	
+	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
@@ -83,7 +110,7 @@ class Objective extends CActiveRecord
 		return array(
 	           'tasks'=>array(self::HAS_MANY, 'Task', 'id_objective'),
                'frequency'=>array(self::BELONGS_TO, 'Frequency', 'id_frequency'),
-		       'tasklogs'=>array(self::HAS_MANY, 'TaskLog', 'id_objective','order' => 'id_tlog desc'),
+		       'tasklogs'=>array(self::HAS_MANY, 'TaskLog', 'id_objective','order' => 'dated desc'),
 		);
 	}
 

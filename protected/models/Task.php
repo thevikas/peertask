@@ -53,9 +53,10 @@ class Task extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-		        'tasklogs'=>array(self::HAS_MANY, 'TaskLog', 'id_task'),
+		        'tasklogs'=>array(self::HAS_MANY, 'TaskLog', 'id_task','order' => 'dated desc'),
 		        'mytask'=>array(self::HAS_ONE, 'TaskUser', 'id_task','condition' => 'mytask.id_user = ' . Yii::app()->user->id),
 		        'shared'=>array(self::HAS_MANY, 'TaskUser', 'id_task','condition' => 'rel=\'SharedOwner\' and id_from_user = ' . Yii::app()->user->id),
+		        'alltask'=>array(self::HAS_MANY, 'TaskUser', 'id_task','condition' => 'id_user=' . Yii::app()->user->id . ' or id_from_user = ' . Yii::app()->user->id),
 		        'objective'=>array(self::BELONGS_TO, 'Objective', 'id_objective'),
 		        //'user'=>array(self::BELONGS_TO, 'User', 'id_user'),
 		);

@@ -1,11 +1,22 @@
-<ol>
+<ol class="tlist">
 <?php
+$ctr=0;
+$per_line = 4;
 foreach($tasks as $t)
 {
+    $p = "p" . ($ctr % $per_line);
+    $cls = "";
+    if($ctr % $per_line == 0)
+        $cls = 'first';
+    
+    if( ($ctr % $per_line) == $per_line - 1)
+        $cls = 'last';
+    
+    $cls = "$cls $p";
     ?>
-    <li>
+    <li class="<?php echo $cls;?>">
 	<?php 
-	    echo $t->name . ' ';
+	    echo '<h3 class="tname">' . $t->name . '</h3> ';
     	echo CHtml::link('edit',array('/tasks/update','id' => $t->id_task)) . ' ';
     	echo CHtml::link('delete',array('/tasks/delete','id' => $t->id_task)) . ' ';
     	echo CHtml::link('log',array('/tasks/logbook','id' => $t->id_task)) . ' ';
@@ -34,6 +45,7 @@ foreach($tasks as $t)
     ?>
     </li>
     <?php 
+    $ctr++;
 } 
 ?>
 </ol>

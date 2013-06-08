@@ -13,23 +13,29 @@ $this->breadcrumbs=array(
 <?php echo CHtml::link('All',array('/objectives/index','show' => 'all'),array('class' => $allactive)); ?>
 </div>
 
-<ol>
+<ol id="objlist">
 <?php
 foreach($objectives as $obj)
 {
     ?>
-    <li>
-	<strong><?php echo $obj->name . " " . $obj->frequencyname . '</strong> ';
+    <li class="obj">
+	<h2 class="objname"><?php echo $obj->name . " " . $obj->frequencyname . '</h2> ';
 	echo CHtml::link('edit',array('/objectives/update','id' => $obj->id_objective)) . ' ';
 	echo CHtml::link('Add Task',array('/tasks/new','id_objective' => $obj->id_objective)) . ' ';
         
         if(isset($obj->tasklogs[0]))
         {
-            ?>
-            <strong>
-            <?php echo $obj->tasklogs[0]->dated . ' - ' .  $obj->tasklogs[0]->comment;?>
-            </strong>
-            <?php 
+            $dt = date('Y-m-d',strtotime($obj->tasklogs[0]->dated));
+            $yest = date('Y-m-d',strtotime('yesterday'));
+            $today = date('Y-m-d');
+            if($dt == $yest || $dt == $today)
+            {
+                ?>
+                <strong>
+                <?php echo $obj->tasklogs[0]->dated . ' - ' .  $obj->tasklogs[0]->comment;?>
+                </strong>
+                <?php
+            } 
         }
 
                 echo $this->renderPartial("_tasks",array('tasks' => $obj->tasks));
