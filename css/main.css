@@ -329,3 +329,13 @@ ol.tlist li.p0.last
 {
     margin-left: 0px; 
 }
+
+strong.update
+{
+ background-color: yellow;
+}
+
+ol#objlist ol li.task
+{
+ background-color: skyblue;
+}

@@ -12,7 +12,7 @@ foreach($tasks as $t)
     if( ($ctr % $per_line) == $per_line - 1)
         $cls = 'last';
     
-    $cls = "$cls $p";
+    $cls = "$cls $p task";
     ?>
     <li class="<?php echo $cls;?>">
 	<?php 

@@ -31,7 +31,7 @@ foreach($objectives as $obj)
             if($dt == $yest || $dt == $today)
             {
                 ?>
-                <strong>
+                <strong class="update">
                 <?php echo $obj->tasklogs[0]->dated . ' - ' .  $obj->tasklogs[0]->comment;?>
                 </strong>
                 <?php
