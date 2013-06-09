@@ -112,7 +112,7 @@ class TasksController extends Controller
                 $this->redirect(array('/objectives/index'));
             }
         }
-        $this->render('logbook',array('model'=>$model));
+        $this->render('logbook',array('model'=>$model,'task' => $task));
     }
 
     public function actionNew($id_objective = 0)

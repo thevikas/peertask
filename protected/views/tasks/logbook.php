@@ -4,6 +4,10 @@
 /* @var $form CActiveForm */
 ?>
 
+<?php
+echo $this->renderPartial('_taskhistory',array('task' => $task)); 
+?>
+
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(

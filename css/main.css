@@ -339,3 +339,15 @@ ol#objlist ol li.task
 {
  background-color: skyblue;
 }
+table.tasklog
+{
+ background-color: pink;
+ float:right;
+ width: 500px;
+}
+
+table.tasklog tr
+{
+ border-top: solid 1px blue;
+ padding: 2px;
+}
