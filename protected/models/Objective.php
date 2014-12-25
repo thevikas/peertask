@@ -24,7 +24,7 @@ class Objective extends CActiveRecord
 	public function byuser($id_user)
 	{
         $this->getDbCriteria()->mergeWith(array(
-                'condition'=>'id_user = :userid or id_from_user = :userid',
+                'condition'=>'id_user = :userid',
         		'params' => array(':userid' => $id_user),
         ));
         return $this;
